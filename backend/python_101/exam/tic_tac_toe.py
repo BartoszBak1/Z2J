@@ -55,7 +55,7 @@ def get_coordinate_from_user(axis):
     """This function gets the user's moves"""
     while True:
         try:
-            coordinate = int(input(f"Enter number of {axis}: ")) - 1
+            coordinate = int(input(f"Enter the {axis} number : ")) - 1
             if coordinate in range(0, 3):
                 break
             else:
