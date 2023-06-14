@@ -51,7 +51,6 @@ class Elf(Person):
 
 
 class Factory:
-    # n_workers = 0
 
     def __init__(self, n_prod_line, kind_prod):
         self.n_prod_line = n_prod_line
@@ -61,7 +60,6 @@ class Factory:
 
     def add_worker(self, worker):
         if len(self.workers) < self.max_workers:
-            # self.n_workers = self.n_workers + 1
             self.workers.append(worker)
             return True
         else:
@@ -84,7 +82,7 @@ class Factory:
 
         return value / self.get_number_of_workers()
 
-
+# test
 elf1 = Elf("Tim", 225, "mechanics")
 elf2 = Elf("Bob", 130, "production worker")
 elf3 = Elf("Tom", 221, "production worker")
