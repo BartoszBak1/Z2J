@@ -1,0 +1,5 @@
+name,strength,probability,description
+sword,3,0.2,Sword adds you 3 points of strength.
+shield,2,0.3,Shield adds you 2 points of strength.
+boosting elixir,3,0.2,If you use boosting elixir your strength will increase by 3 point in current battle.
+poison elixir,-3,0.2,If you use poison elixir your enemy's strength will decrease by 3 point in current battle.

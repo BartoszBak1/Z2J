@@ -1,0 +1,1 @@
+Exam from level 2. Simple text game.
