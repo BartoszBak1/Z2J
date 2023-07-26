@@ -61,7 +61,7 @@ class Items:
         
 
     def describe(self):
-        pass
+        print("I'm describing item.")
 
 class Elixirs(Items):
     pass

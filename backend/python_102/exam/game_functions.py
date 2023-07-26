@@ -1,5 +1,6 @@
 # funkcje pomocnicze wykorzystywane do obsłużenia logiki gry
 import csv
+import random
 import pathlib
 
 
@@ -37,3 +38,21 @@ def fight(hero, opponent, number_of_wins):
     else:
          print("You loose. :(\nTHE END!")
          return -1
+    
+def get_events_probabilities(items_description):
+
+    events_probabilities = {}
+    for name in items_description:
+        events_probabilities[name] = items_description[name]['probability']
+    events_probabilities['villain'] = 0.2
+
+    return events_probabilities
+
+def draw_event(events_probabilities):
+    events = list(events_probabilities.keys())
+    probabilities = list(events_probabilities.values())
+
+    event = random.choices(events, probabilities, k=1)[0]
+    if event != "villain":
+        del events_probabilities[event] 
+    return event, events_probabilities
