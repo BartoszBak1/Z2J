@@ -19,15 +19,6 @@ villains = [Villain("Hans", 3), Villain("Khan", 5), Villain("Karl", 10)]
 number_of_wins = 0
 events_probabilities = get_events_probabilities(items_description)
 
-def user_move(msg, values):
-    move = input(msg)
-    while move not in values:
-        print("Wrong choice")
-        move = input(msg)
-
-    return move
-
-
 def check_move():
     # funkcja reagująca na ruch gracza
     pass
@@ -46,25 +37,16 @@ while True:
 
         if event != "villain":
             item = items[event]
-            print(f"""You found {items[event].name})""")
-            response = ""
-            while response not in ["1", "2", "3"]:
-                response = input(
-                    """
+            print(f"""You found {item.name})""")
+            msg = """
     Press:
     1 - to take item,
     2 - to read about item,
     3 - to leave item./n
                     """
-                )
-                if response == "1":
-                    hero.take_item(item)
-                elif response == "2":
-                    items[event].describe()
-                elif response == "3":
-                    hero.leave_item(item)
-                else:
-                    print("Wrong choice.")
+            response = user_move(msg, ['1', '2', '3'])
+            hero.make_decision_what_to_do_with_item(response, item, msg)
+            hero.show_items()
         else:
             opponent = return_villain_to_fight(number_of_wins, villains)
             start_strength = hero.strength

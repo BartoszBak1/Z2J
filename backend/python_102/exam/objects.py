@@ -1,3 +1,5 @@
+import game_functions as gf
+
 class Person:
     def __init__(self, name, strength):
         self.name = name
@@ -44,6 +46,18 @@ class Hero(Person):
 
     def leave_item(self, item):
         print(f"You leave {item.name}")
+    
+    def make_decision_what_to_do_with_item(self, response:str, item,  msg:str):
+
+        while response == '2':
+            item.describe()
+            response = gf.user_move(msg, ['1', '2', '3'])
+        if response == "1":
+            self.take_item(item)
+            print(f"You have taken {item.name}.")
+
+        if response == "3":
+            self.leave_item(item)
 
 
 class Villain(Person):

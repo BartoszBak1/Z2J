@@ -39,8 +39,15 @@ def fight(hero, opponent, number_of_wins):
          print("You loose. :(\nTHE END!")
          return -1
     
-def get_events_probabilities(items_description):
+def get_events_probabilities(items_description: dict):
+    """Funkcja zwracająca słownik z eventem i prawdopodobieństwem. 
 
+    Args:
+        items_description (dict): wynik funkcji load_csv_file_to_dict
+
+    Returns:
+        dict: {'event name': probability, ...}
+    """
     events_probabilities = {}
     for name in items_description:
         events_probabilities[name] = items_description[name]['probability']
@@ -48,7 +55,16 @@ def get_events_probabilities(items_description):
 
     return events_probabilities
 
-def draw_event(events_probabilities):
+def draw_event(events_probabilities: dict):
+    """Funkcja losująca event. Zwraca nazwę wylosowanego eventu i słownik z eventami bez wylosowanego eventu.
+
+    Args:
+        events_probabilities (dict): wynik funkcji get_events_probabilities()
+
+    Returns:
+        str: nazwa eventu
+        dict: słownik bez wylosowaego eventu
+    """
     events = list(events_probabilities.keys())
     probabilities = list(events_probabilities.values())
 
@@ -56,3 +72,13 @@ def draw_event(events_probabilities):
     if event != "villain":
         del events_probabilities[event] 
     return event, events_probabilities
+
+def user_move(msg, values):
+    move = input(msg)
+    while move not in values:
+        print("Wrong choice")
+        move = input(msg)
+
+    return move
+
+
