@@ -8,6 +8,7 @@ path = pathlib.Path.cwd() / "backend" / "python_102" / "exam" / "item_descriptio
 
 items_description = load_csv_file_to_dict(path)
 print(items_description)
+
 # create items
 items = {}
 for key, values in items_description.items():
@@ -46,7 +47,7 @@ while True:
                     """
             response = user_move(msg, ['1', '2', '3'])
             hero.make_decision_what_to_do_with_item(response, item, msg)
-            hero.show_items()
+            # hero.show_items()
         else:
             opponent = return_villain_to_fight(number_of_wins, villains)
             start_strength = hero.strength
@@ -80,13 +81,17 @@ while True:
                         if chose_item == '1':
                             try:
                                 hero.elixirs['boosting elixir'].use(hero)
-# hero.elixirs['boosting elixir'].use(hero)
-# AttributeError: 'float' object has no attribute 'use'
+                                hero.delete_item('boosting elixir')
+                                events_probabilities['boosting elixir'] = get_events_probabilities(items_description)['boosting elixir']
                             except KeyError:
                                 print("You don't have this elixir.")
                         elif chose_item == '2':
                             try:
                                 hero.elixirs['poisonous elixir'].use(opponent)
+                                hero.delete_item('poisonous elixir')
+                                events_probabilities['poisonous elixir']  = get_events_probabilities(items_description)['poisonous elixir']
+#                                     return person.elixirs[self.name].pop()
+# AttributeError: 'Villain' object has no attribute 'elixirs'
                             except KeyError:
                                 print("You don't have this elixir.")
                         elif chose_item == '3':
@@ -97,6 +102,7 @@ while True:
                     hero.run_away()
                 elif response == "1":
                     fight_result = fight(hero, opponent, number_of_wins)
+                    number_of_wins = fight_result
                     # dopisać scenariusze w zależności od wyniku walki
                     # jesli wygrał przywrócić siłę bohaterowiz początku walki
 
@@ -111,8 +117,8 @@ while True:
         print("Game was close")
         break
 # Plan prac:
-# 1) 
-# # 2)
+# 1) losowanie tucizn czy można mieć 2? 
+# 2) 
 # 3) 
 # 4)
 # 5) funkcja walki / unieczki prze walką

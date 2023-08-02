@@ -33,15 +33,15 @@ class Hero(Person):
 
     def show_items(self):
         # zw;racać nazwę i siłę przedmiotów, a nie drukować.
-        print(f"Your weapons: {self.weapons}, Your elixirs: {self.elixirs}")
+        print(f"Your weapons: {list(self.weapons.keys())}, Your elixirs: {list(self.elixirs.keys())}")
          
     def take_item(self, item):
         # Jak rozróznić elksiry od broni
         # zmienić weapons i eliksiry na słowniki
         if item.name.find("elixir") != -1:
-            self.elixirs[item.name] = item.strength_boost
+            self.elixirs[item.name] = item
         else :   
-            self.weapons[item.name] = item.strength_boost
+            self.weapons[item.name] = item
             self.strength = self.strength + item.strength_boost
 
     def leave_item(self, item):
@@ -59,6 +59,8 @@ class Hero(Person):
         if response == "3":
             self.leave_item(item)
 
+    def delete_item(self, item):
+        del self.elixirs[item]
 
 class Villain(Person):
     def speak(self, sound="I destroy you!"):
@@ -72,6 +74,7 @@ class Items:
 
     def use(self, person):
         person.strength = person.strength + self.strength_boost
+        
         
 
     def describe(self):
