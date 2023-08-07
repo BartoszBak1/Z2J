@@ -83,6 +83,7 @@ while True:
                                 hero.elixirs['boosting elixir'].use(hero)
                                 hero.delete_item('boosting elixir')
                                 events_probabilities['boosting elixir'] = get_events_probabilities(items_description)['boosting elixir']
+                                print(f"Your strength {hero.strength}. Strength of your opponent {opponent.strength}")
                             except KeyError:
                                 print("You don't have this elixir.")
                         elif chose_item == '2':
@@ -90,8 +91,7 @@ while True:
                                 hero.elixirs['poisonous elixir'].use(opponent)
                                 hero.delete_item('poisonous elixir')
                                 events_probabilities['poisonous elixir']  = get_events_probabilities(items_description)['poisonous elixir']
-#                                     return person.elixirs[self.name].pop()
-# AttributeError: 'Villain' object has no attribute 'elixirs'
+                                print(f"Your strength {hero.strength}. Strength of your opponent {opponent.strength}")
                             except KeyError:
                                 print("You don't have this elixir.")
                         elif chose_item == '3':
@@ -103,33 +103,34 @@ while True:
                 elif response == "1":
                     fight_result = fight(hero, opponent, number_of_wins)
                     number_of_wins = fight_result
-                    # dopisać scenariusze w zależności od wyniku walki
-                    # jesli wygrał przywrócić siłę bohaterowiz początku walki
-
                     if fight_result != -1:
                         hero.strength = start_strength
                 else:
                     print("Wrong choice.")
-
     elif user_choice == "2":
         print("Game description ...")
     else:
-        print("Game was close")
+        print("Bye. Game was closed")
         break
+    if number_of_wins == 3:
+        print("Congratulations. You win with all enemies.\nTHE END")
+        break
+    elif number_of_wins == -1:
+        break
+
 # Plan prac:
-# 1) losowanie tucizn czy można mieć 2? 
-# 2) 
-# 3) 
+# 1) funkcja wczytująca z pliku.txt instrukcję
+# 2) poprawienie komunikatów do urzytkownika
+# 3) spakowanie w funkcje scenariuszy walki (to co jest po spotkaniu przeciwnika)
 # 4)
-# 5) funkcja walki / unieczki prze walką
-# 7) możliwość podejrzenia sprzętów przed wykonaiem ruch
-# 8) możliwość sprawdzenia siły w trakcie walki
-# 9) pętla do 3 wygranych
-# 10) funkcja wczytująca z pliku.txt instrukcję
+# 5) 
+# 7) 
+# 8)
+# 9) 
+# 10) 
 
 # Done
-# 1) przygotować funkcję wczytującą plik z danymi o przedmiotach
-
+# 1) 
 
 # from objects import Hero, Villain, Items
 # import random
