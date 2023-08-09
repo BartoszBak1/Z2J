@@ -1,0 +1,4 @@
+Gra konsolowa.
+Aby wygrać musisz pokonać 3 przeciwników.
+Po drodze zbieraj przedmioty które pomogą ci w walce.
+Aby użyć przedmiotu podczas walki naciśnij 3 - pokaż przedmioty a później wybierz przedmiot który chcesz użyć. 

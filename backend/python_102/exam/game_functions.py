@@ -22,6 +22,13 @@ def load_csv_file_to_dict(path):
 
     return items_dict
 
+def load_csv_file(path):
+    # items = []
+    
+    with path.open(mode="r", encoding="utf-8") as file:
+        text = file.read()
+    return text
+
 def return_villain_to_fight(number_of_wins, villains):
         return villains[number_of_wins]
 
