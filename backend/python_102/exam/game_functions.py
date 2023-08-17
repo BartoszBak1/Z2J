@@ -1,4 +1,5 @@
 # funkcje pomocnicze wykorzystywane do obsłużenia logiki gry
+# from objects import Hero, Villain, Items, Person
 import csv
 import random
 import pathlib
@@ -22,32 +23,38 @@ def load_csv_file_to_dict(path):
 
     return items_dict
 
+
 def load_csv_file(path):
     # items = []
-    
+
     with path.open(mode="r", encoding="utf-8") as file:
         text = file.read()
     return text
 
+
 def return_villain_to_fight(number_of_wins, villains):
-        return villains[number_of_wins]
+    return villains[number_of_wins]
+
 
 def fight(hero, opponent, number_of_wins):
     if hero.strength > opponent.strength:
         number_of_wins += 1
         print("Congratulation you win.")
         return number_of_wins
-    
+
     elif hero.strength == opponent.strength:
-        print("You are too weak to defeat your opponent, but luckily, you managed to escape.\nKeep playing.")
+        print(
+            "You are too weak to defeat your opponent, but luckily, you managed to escape.\nKeep playing."
+        )
         return number_of_wins
-    
+
     else:
-         print("You loose. :(\nTHE END!")
-         return -1
-    
+        print("You loose. :(\nTHE END!")
+        return -1
+
+
 def get_events_probabilities(items_description: dict):
-    """Funkcja zwracająca słownik z eventem i prawdopodobieństwem. 
+    """Funkcja zwracająca słownik z eventem i prawdopodobieństwem.
 
     Args:
         items_description (dict): wynik funkcji load_csv_file_to_dict
@@ -57,10 +64,11 @@ def get_events_probabilities(items_description: dict):
     """
     events_probabilities = {}
     for name in items_description:
-        events_probabilities[name] = items_description[name]['probability']
-    events_probabilities['villain'] = 0.2
+        events_probabilities[name] = items_description[name]["probability"]
+    events_probabilities["villain"] = 0.2
 
     return events_probabilities
+
 
 def draw_event(events_probabilities: dict):
     """Funkcja losująca event. Zwraca nazwę wylosowanego eventu i słownik z eventami bez wylosowanego eventu.
@@ -77,8 +85,9 @@ def draw_event(events_probabilities: dict):
 
     event = random.choices(events, probabilities, k=1)[0]
     if event != "villain":
-        del events_probabilities[event] 
+        del events_probabilities[event]
     return event, events_probabilities
+
 
 def user_move(msg, values):
     move = input(msg)
@@ -89,3 +98,19 @@ def user_move(msg, values):
     return move
 
 
+def chose_elixir(
+    hero, recipient, opponent, elixir_name: str, events_probabilities, items_description
+):
+    try:
+        hero.elixirs[elixir_name].use(recipient)
+        hero.delete_item(elixir_name)
+        events_probabilities[elixir_name] = get_events_probabilities(items_description)[
+            elixir_name
+        ]
+        print(
+            f"You used {elixir_name}. Your strength is {hero.strength}. Strength of your opponent is {opponent.strength}"
+        )
+    except KeyError:
+        print("You don't have this elixir.")
+
+    return events_probabilities

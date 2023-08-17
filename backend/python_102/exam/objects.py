@@ -68,17 +68,16 @@ class Villain(Person):
 
 
 class Items:
-    def __init__(self, name, strength_boost):
+    def __init__(self, name, strength_boost, description):
         self.name = name
         self.strength_boost = strength_boost
+        self.description = description
 
     def use(self, person):
         person.strength = person.strength + self.strength_boost
         
-        
-
     def describe(self):
-        print("I'm describing item.")
+        print(self.description)
 
 class Elixirs(Items):
     pass
