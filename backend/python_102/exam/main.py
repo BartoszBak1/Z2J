@@ -52,6 +52,7 @@ Press:
 Your choice: """
 
 # main code
+print(f"Hi {hero.name}!")
 while True:
     user_choice = user_move(msg_start, ["1", "2", "3"])
     if user_choice == "1": #if user decided to move:
@@ -96,7 +97,7 @@ while True:
         break
 
 # Plan prac:
-# 1) zaktualizować opis gry
+# 1) 
 # 2) dodać komentarze do funkcji
 # 3) 
 # 4)

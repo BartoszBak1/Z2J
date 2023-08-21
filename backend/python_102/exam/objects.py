@@ -46,7 +46,7 @@ class Hero(Person):
             self.elixirs[item.name] = item
         else:
             self.weapons[item.name] = item
-            self.strength = self.strength + item.strength_boost
+            item.use(self)
 
     def leave_item(self, item):
         print(f"You leave {item.name}")
@@ -85,7 +85,6 @@ class Hero(Person):
     def choose_elixir(
         self, opponent, msg_elixir, events_probabilities, items_description
     ):
-        # if hero.elixirs != {}:
         self.show_items()
         chose_item = gf.user_move(msg_elixir, ["1", "2", "3"])
         if chose_item == "1":
@@ -151,11 +150,3 @@ class Items:
 
     def describe(self):
         print(self.description)
-
-
-class Elixirs(Items):
-    pass
-
-
-# Czym będzie się różnić kalsa broń od zwykłego przedmiotu?
-# klasa eliksir będzię się różnić od broni funkcją use()
