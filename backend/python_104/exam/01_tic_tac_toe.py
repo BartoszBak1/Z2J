@@ -95,8 +95,6 @@ def click_box(btn):
                 game_over, msg = check_board()
                 lb["text"] = msg
 
-    print(game_over)
-
 
 def restart():
     board = {
@@ -112,6 +110,7 @@ def restart():
     }
     for button in board.values():
         button["text"] = ""
+    lb["text"] = "Your move"
 
 
 window = tk.Tk()
