@@ -164,7 +164,7 @@ class Server:
         self.db.update_unread_msgs(users, recipient, unread_msgs)
         self.db.save_data(self.db.database_path, self.db.file_users, users) 
 
-        return {"status": "success", "message": f"Message sent to {recipient}."}
+        return {"status": "success", "message": f"The message has been sent to {recipient}."}
 
     def logout(self, **kwargs):
 
@@ -179,16 +179,17 @@ class Server:
             return {"status": "failure", "message": "No user is currently logged in."}
         
         messages = self.db.load_data(self.db.database_path, self.db.file_messages)
-        user_msgs = self.db.get_user_msgs( messages, self.logged_in_user)
-
-        if self.logged_in_role == 'admin':
-            return messages
+        user_msgs = self.db.get_user_msgs_from_inbox( messages, self.logged_in_user)
         
-        if len(user_msgs) == 0:
+        if len(user_msgs) == 0 and self.logged_in_role == 'user':
             return {"message": f"You don't have any messages."}
         else:
             # update user data
             users = self.db.load_data(self.db.database_path, self.db.file_users)
             self.db.update_unread_msgs(users, self.logged_in_user, 0)
             self.db.save_data(self.db.database_path, self.db.file_users, users)
-            return user_msgs
+
+            if self.logged_in_role == 'admin':
+                return messages
+            else:
+                return user_msgs

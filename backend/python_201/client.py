@@ -20,7 +20,7 @@ class Client:
 
         if command in self.commands.keys():
             for option in self.commands[command]:
-                user_input[option] = input(f"\n>>> {option}: ").strip()
+                user_input[option] = input(f">>> {option}: ").strip()
 
         return user_input
 
@@ -32,7 +32,6 @@ class Client:
             while True:
                 # get information from user
                 msg = self.get_user_input()
-                print(msg)
                 # send data to server
                 s.sendall(json.dumps(msg).encode('utf-8'))
                 # get server response
@@ -46,5 +45,10 @@ class Client:
                         print()
                         for key, value in server_response.items():
                             print(f'{key}: {value}')
+                    elif isinstance(server_response, list):
+                        for item in server_response:
+                            print()
+                            for key, value in item.items():
+                                print(f'{key}: {value}')
                     else:
                         print(f'\n{server_response}')

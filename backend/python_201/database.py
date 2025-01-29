@@ -39,12 +39,12 @@ class Database():
             
         return None
     
-    def get_user_msgs(self, data, username):
+    def get_user_msgs_from_inbox(self, data, username):
         
         msgs = []
         for msg in data:
-            if msg['sender'] == username:
-                msgs.append({'receiver': msg['receiver'], 'message': msg['message']})
+            if msg['receiver'] == username:
+                msgs.append({'sender': msg['sender'], 'message': msg['message']})
             
         return msgs
 
